@@ -1,302 +1,305 @@
-<!DOCTYPE html>
-<html lang="id">
+<!DOCTYPE html> 
+<html lang="id"> 
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mariposa Tour - Indonesia</title>
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400;600;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-    
-    <!-- GSAP Core -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<head> 
+<meta charset="UTF-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<title>Mariposa Tour - Indonesia</title> 
+<!-- Fonts --> 
+<link rel="preconnect" href="https://fonts.googleapis.com"> 
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400;600;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"> 
+<!-- GSAP Core --> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script> 
 
-    <style>
-        :root {
-            --bg-color: #ffffff;
-            --text-color: #000000;
-            --accent-color: #0088cc;
-        }
+<style> 
+:root { 
+--bg-color: #ffffff; 
+--text-color: #000000; 
+--accent-color: #0088cc; 
+} 
 
-        body, html {
-            margin: 0; padding: 0;
-            width: 100%; height: 100%;
-            background-color: #1c1c1c;
-            overflow: hidden;
-            font-family: 'Segoe UI', sans-serif;
-        }
+body, html { 
+margin: 0; padding: 0; 
+width: 100%; height: 100%; 
+background-color: #1c1c1c; 
+overflow: hidden; 
+font-family: 'Segoe UI', sans-serif; 
+} 
 
-        /* --- PRELOADER --- */
-        .wrapper {
-            position: fixed; inset: 0; z-index: 99999;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            background: var(--bg-color);
-        }
+/* --- PRELOADER --- */ 
+.wrapper { 
+position: fixed; inset: 0; z-index: 99999; 
+display: flex; flex-direction: column; align-items: center; justify-content: center; 
+background: var(--bg-color); 
+} 
 
-        .svg-container { 
-            width: 100%; 
-            height: 100%; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-        }
+.svg-container { 
+width: 100%; 
+height: 100%; 
+display: flex; 
+justify-content: center; 
+align-items: center; 
+} 
 
-        /* Responsif SVG: Menyesuaikan ukuran di layar kecil */
-        @media (max-width: 768px) {
-            .svg-container svg {
-                width: 100%;
-                height: auto;
-                transform: scale(2.5); /* Memperbesar skala agar logo dan teks lebih besar dan lebih tengah */
-                transform-origin: center;
-            }
-            .text-name { font-size: 45px !important; }
-            .text-title { font-size: 30px !important; letter-spacing: 12px !important; }
-        }
+/* Responsif SVG */ 
+@media (max-width: 768px) { 
+.svg-container svg { 
+width: 100%; 
+height: auto; 
+transform: scale(2.5); 
+transform-origin: center; 
+} 
+.text-name { font-size: 45px !important; } 
+.text-title { font-size: 30px !important; letter-spacing: 12px !important; } 
+} 
 
-        .animated-content {
-            transform-origin: 960px 540px;
-            animation: cinematicReveal 2.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            opacity: 0;
-        }
+.animated-content { 
+transform-origin: 960px 540px; 
+animation: cinematicReveal 2.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
+opacity: 0; 
+} 
 
-        .line-anim {
-            opacity: 0;
-            animation: growLine 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            animation-delay: 0.5s;
-        }
+.line-anim { 
+opacity: 0; 
+animation: growLine 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
+animation-delay: 0.5s; 
+} 
 
-        .text-slide-anim {
-            opacity: 0;
-            animation: slideRight 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            animation-delay: 0.8s;
-        }
+.text-slide-anim { 
+opacity: 0; 
+animation: slideRight 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
+animation-delay: 0.8s; 
+} 
 
-        .text-name { font-family: 'Raleway', sans-serif; font-weight: 900; font-size: 72px; fill: var(--text-color); }
-        .text-title { font-family: 'Raleway', sans-serif; font-weight: 400; font-size: 24px; letter-spacing: 16px; fill: var(--accent-color); }
+.text-name { font-family: 'Raleway', sans-serif; font-weight: 900; font-size: 72px; fill: var(--text-color); } 
+.text-title { font-family: 'Raleway', sans-serif; font-weight: 400; font-size: 24px; letter-spacing: 16px; fill: var(--accent-color); } 
 
-        @keyframes cinematicReveal {
-            0% { transform: scale(1.5); opacity: 0; filter: blur(20px); }
-            100% { transform: scale(1); opacity: 1; filter: blur(0px); }
-        }
-        @keyframes growLine {
-            0% { transform: scaleY(0); opacity: 0; transform-origin: center; }
-            100% { transform: scaleY(1); opacity: 1; transform-origin: center; }
-        }
-        @keyframes slideRight {
-            0% { transform: translateX(-50px); opacity: 0; }
-            100% { transform: translateX(0); opacity: 1; }
-        }
+@keyframes cinematicReveal { 
+0% { transform: scale(1.5); opacity: 0; filter: blur(20px); } 
+100% { transform: scale(1); opacity: 1; filter: blur(0px); } 
+} 
+@keyframes growLine { 
+0% { transform: scaleY(0); opacity: 0; transform-origin: center; } 
+100% { transform: scaleY(1); opacity: 1; transform-origin: center; } 
+} 
+@keyframes slideRight { 
+0% { transform: translateX(-50px); opacity: 0; } 
+100% { transform: translateX(0); opacity: 1; } 
+} 
 
-        .flash-overlay { fill: #ffffff; animation: fadeOutFlash 1.5s ease-out forwards; }
-        @keyframes fadeOutFlash { 0% { opacity: 1; } 100% { opacity: 0; pointer-events: none; } }
+.flash-overlay { fill: #ffffff; animation: fadeOutFlash 1.5s ease-out forwards; } 
+@keyframes fadeOutFlash { 0% { opacity: 1; } 100% { opacity: 0; pointer-events: none; } } 
 
-        /* --- FLOW IMAGES --- */
-        .flow {
-            height: 100vh; width: 100vw;
-            position: fixed; top: 0; left: 0;
-            background: #1c1c1c;
-            overflow: hidden;
-            visibility: hidden;
-        }
+/* --- FLOW IMAGES --- */ 
+.flow { 
+height: 100vh; width: 100vw; 
+position: fixed; top: 0; left: 0; 
+background: #1c1c1c; 
+overflow: hidden; 
+visibility: hidden; 
+} 
 
-        .flow-images {
-            position: absolute; top: 0; left: 0;
-            width: 100%; height: 100%;
-            transform-style: preserve-3d;
-            perspective: 2000px;
-        }
+.flow-images { 
+position: absolute; top: 0; left: 0; 
+width: 100%; height: 100%; 
+transform-style: preserve-3d; 
+perspective: 2000px; 
+} 
 
-        .flow .img {
-            position: absolute; top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 500px; height: 350px;
-            will-change: transform, opacity;
-        }
+.flow .img { 
+position: absolute; 
+top: 50%; 
+left: 50%; 
+/* Menggunakan percent agar aman di mobile */
+transform: translate(-50%, -50%); 
+width: 500px; height: 350px; 
+will-change: transform, opacity; 
+} 
 
-        /* Ukuran gambar responsif */
-        @media (max-width: 1024px) { .flow .img { width: 400px; height: 280px; } }
-        @media (max-width: 600px) { .flow .img { width: 280px; height: 200px; } }
+/* Ukuran gambar responsif */ 
+@media (max-width: 1024px) { .flow .img { width: 400px; height: 280px; } } 
+@media (max-width: 600px) { .flow .img { width: 280px; height: 200px; } } 
 
-        .flow .img img { width: 100%; height: 100%; object-fit: cover; border-radius: 4px; }
-        .flow .img.cover { width: 100% !important; height: 100% !important; }
-        .flow .img.cover::after {
-            content: ""; position: absolute; inset: 0;
-            background: rgba(0, 0, 0, 0.4);
-        }
+.flow .img img { width: 100%; height: 100%; object-fit: cover; border-radius: 4px; } 
 
-        .section-text {
-            position: absolute; top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 100; text-align: center;
-            color: #ffffff; font-family: 'Instrument Serif', serif;
-            width: 90%; pointer-events: none;
-        }
+/* Perbaikan Khusus Foto Terakhir (Cover) */
+.flow .img.cover { 
+width: 100% !important; 
+height: 100% !important; 
+z-index: 50;
+} 
+.flow .img.cover::after { 
+content: ""; position: absolute; inset: 0; 
+background: rgba(0, 0, 0, 0.4); 
+} 
 
-        .section-text p { font-size: clamp(1.5rem, 5vw, 2.5rem); letter-spacing: 0.2em; opacity: 0; }
+.section-text { 
+position: absolute; top: 50%; left: 50%; 
+transform: translate(-50%, -50%); 
+z-index: 100; text-align: center; 
+color: #ffffff; font-family: 'Instrument Serif', serif; 
+width: 90%; pointer-events: none; 
+} 
 
-        /* --- OUTRO --- */
-        .outro {
-            height: 100vh; width: 100vw;
-            background: #e9e9e9;
-            display: flex; align-items: center; justify-content: center;
-            position: relative; z-index: 200; opacity: 0;
-        }
+.section-text p { font-size: clamp(1.5rem, 5vw, 2.5rem); letter-spacing: 0.2em; opacity: 0; } 
 
-        .outro h1 {
-            font-family: 'Raleway', sans-serif;
-            font-size: clamp(1.8rem, 8vw, 4rem);
-            text-transform: uppercase;
-            text-align: center;
-            background: linear-gradient(135deg, #1c1c1c 0%, #4a4a4a 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-    </style>
-</head>
+/* --- OUTRO --- */ 
+.outro { 
+height: 100vh; width: 100vw; 
+background: #e9e9e9; 
+display: flex; align-items: center; justify-content: center; 
+position: relative; z-index: 200; opacity: 0; 
+} 
 
-<body>
+.outro h1 { 
+font-family: 'Raleway', sans-serif; 
+font-size: clamp(1.8rem, 8vw, 4rem); 
+text-transform: uppercase; 
+text-align: center; 
+background: linear-gradient(135deg, #1c1c1c 0%, #4a4a4a 100%); 
+-webkit-background-clip: text; 
+-webkit-text-fill-color: transparent; 
+} 
+</style> 
+</head> 
 
-    <!-- 1. PRELOADER -->
-    <div id="preloader" class="wrapper">
-        <div class="svg-container">
-            <!-- preserveAspectRatio="xMidYMid meet" memastikan logo & teks tidak terpotong lebar layar -->
-            <svg viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid meet">
-                <defs>
-                    <!-- Memperlebar area mask agar teks Mariposa tidak terpotong saat slide -->
-                    <clipPath id="reveal-mask">
-                        <rect x="940" y="200" width="1000" height="700" />
-                    </clipPath>
-                </defs>
-                <rect width="1920" height="1080" fill="#ffffff" />
-                <g class="animated-content">
-                    <image href="logobg.png" x="520" y="340" width="450" height="400" preserveAspectRatio="xMidYMid meet" />
-                    <line class="line-anim" x1="960" y1="440" x2="960" y2="620" stroke="#111111" stroke-width="3" />
-                    <g clip-path="url(#reveal-mask)">
-                        <g transform="translate(1000, 530)">
-                            <g class="text-slide-anim">
-                                <text class="text-name" x="0" y="10">Mariposa Tour</text>
-                                <text class="text-title" x="5" y="65">Indonesia</text>
-                            </g>
-                        </g>
-                    </g>
-                </g>
-                <rect class="flash-overlay" width="1920" height="1080" />
-            </svg>
-        </div>
-    </div>
+<body> 
 
-    <!-- 2. FLOW ANIMATION -->
-    <div class="flow">
-        <div class="section-text">
-            <p>EXPLORE THE BEAUTY</p>
-        </div>
-        <div class="flow-images">
-            <!-- Gambar (Sama seperti sebelumnya) -->
-            <div class="img"><img src="https://i.pinimg.com/1200x/6d/c1/51/6dc151fccad84848851615bf7fd5273e.jpg"></div>
-            <div class="img"><img src="https://i.pinimg.com/736x/86/5b/37/865b37c273ce08ccba905cfd5c43f7fd.jpg"></div>
-            <div class="img"><img src="https://i.pinimg.com/1200x/8d/ff/a1/8dffa167d7c06c98303cf74e1e684c0c.jpg"></div>
-            <div class="img"><img src="https://i.pinimg.com/1200x/7a/9d/b3/7a9db3f4a8c14244c9799897c5b27e15.jpg"></div>
-            <div class="img"><img src="https://i.pinimg.com/1200x/92/6a/f6/926af63e63524d0b2b5d4d29f8c2960f.jpg"></div>
-            <div class="img"><img src="https://i.pinimg.com/736x/3c/fd/40/3cfd40d9da71424ccfdb4a4f23d24b15.jpg"></div>
-            <div class="img"><img src="https://i.pinimg.com/736x/b3/a9/ea/b3a9eacf0a48d73daf7a9d99a641358d.jpg"></div>
-            <div class="img"><img src="https://i.pinimg.com/1200x/ea/7d/64/ea7d6422e60fd7d08a2f57e7a81f8db5.jpg"></div>
-            <div class="img"><img src="https://i.pinimg.com/1200x/df/e4/3e/dfe43e45689d1c604a3bdadc10ff6400.jpg"></div>
-            <div class="img"><img src="https://i.pinimg.com/1200x/83/a0/61/83a0611b7dffe9a845b371161da4a6ca.jpg"></div>
-            <div class="img"><img src="https://i.pinimg.com/736x/3b/30/71/3b30719fcf57e0fb4e4c7875c123be89.jpg"></div>
-            <div class="img"><img src="https://i.pinimg.com/1200x/e6/9e/b6/e69eb622ea968f2d107bc5bce20aab71.jpg"></div>
-            <div class="img"><img src="https://i.pinimg.com/1200x/b8/f8/a0/b8f8a07bb42de63c8a03c136457535d4.jpg"></div>
-            <div class="img"><img src="https://i.pinimg.com/1200x/ce/8d/c9/ce8dc976c68aae6e5b6bf13f0b563de7.jpg"></div>
-            <div class="img"><img src="https://i.pinimg.com/736x/bb/02/06/bb0206c39dbae6728fe93e97ea7caff1.jpg"></div>
-            <div class="img"><img src="https://i.pinimg.com/736x/8d/70/95/8d7095181d12fd4452273eb2677a2ff4.jpg"></div>
-            <div class="img"><img src="https://i.pinimg.com/736x/e4/3c/3c/e43c3c3f9bb348d26be1abd4eefbe2b7.jpg"></div>
-            <div class="img"><img src="https://i.pinimg.com/736x/96/e1/ea/96e1eac3c1ccb9c7817cfd83e5d3c113.jpg"></div>
-            <div class="img"><img src="https://i.pinimg.com/1200x/60/7c/14/607c144c8ed65de6179e9dcb43d0a949.jpg"></div>
-            <div class="img"><img src="https://i.pinimg.com/736x/cf/a9/46/cfa94611e77bece6cb69df26f7d27c5c.jpg"></div>
-            <div class="img"><img src="https://i.pinimg.com/736x/04/89/04/048904227df6ca36de30a4d0b874eaa4.jpg"></div>
-            <div class="img"><img src="https://i.pinimg.com/1200x/77/ed/6f/77ed6fa44994de79cf59d92881cad332.jpg"></div>
-            <div class="img"><img src="https://i.pinimg.com/1200x/b5/83/42/b583427440c3b45fb0624961bfc8ea66.jpg"></div>
-            <div class="img"><img src="https://i.pinimg.com/1200x/dc/ee/8b/dcee8b92e1f9f766abe289dec5c54d85.jpg"></div>
-            <div class="img"><img src="https://i.pinimg.com/736x/42/61/90/42619054f77a6e8cbbe20181b93027fd.jpg"></div>
-            <div class="img"><img src="https://i.pinimg.com/736x/b6/ce/95/b6ce9557d1937922cdcc84d4abcb8143.jpg"></div>
-            <div class="img"><img src="https://i.pinimg.com/1200x/a2/00/3f/a2003f95fde2cf6615a484ce3e43b33f.jpg"></div>
-            <div class="img cover"><img src="https://wallpapercave.com/wp/wp5335654.jpg"></div>
-        </div>
-    </div>
+<!-- 1. PRELOADER --> 
+<div id="preloader" class="wrapper"> 
+<div class="svg-container"> 
+<svg viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid meet"> 
+<defs> 
+<clipPath id="reveal-mask"> 
+<rect x="940" y="200" width="1000" height="700" /> 
+</clipPath> 
+</defs> 
+<rect width="1920" height="1080" fill="#ffffff" /> 
+<g class="animated-content"> 
+<image href="logobg.png" x="520" y="340" width="450" height="400" preserveAspectRatio="xMidYMid meet" /> 
+<line class="line-anim" x1="960" y1="440" x2="960" y2="620" stroke="#111111" stroke-width="3" /> 
+<g clip-path="url(#reveal-mask)"> 
+<g transform="translate(1000, 530)"> 
+<g class="text-slide-anim"> 
+<text class="text-name" x="0" y="10">Mariposa Tour</text> 
+<text class="text-title" x="5" y="65">Indonesia</text> 
+</g> 
+</g> 
+</g> 
+</g> 
+<rect class="flash-overlay" width="1920" height="1080" /> 
+</svg> 
+</div> 
+</div> 
 
-    <!-- 3. OUTRO -->
-    <div class="outro">
-        <h1>Welcome to Mariposa Tour</h1>
-    </div>
+<!-- 2. FLOW ANIMATION --> 
+<div class="flow"> 
+<div class="section-text"> 
+<p>EXPLORE THE BEAUTY</p> 
+</div> 
+<div class="flow-images"> 
+<!-- Daftar Gambar --> 
+<div class="img"><img src="https://i.pinimg.com/1200x/6d/c1/51/6dc151fccad84848851615bf7fd5273e.jpg"></div> 
+<div class="img"><img src="https://i.pinimg.com/736x/86/5b/37/865b37c273ce08ccba905cfd5c43f7fd.jpg"></div> 
+<div class="img"><img src="https://i.pinimg.com/1200x/8d/ff/a1/8dffa167d7c06c98303cf74e1e684c0c.jpg"></div> 
+<div class="img"><img src="https://i.pinimg.com/1200x/7a/9d/b3/7a9db3f4a8c14244c9799897c5b27e15.jpg"></div> 
+<div class="img"><img src="https://i.pinimg.com/1200x/92/6a/f6/926af63e63524d0b2b5d4d29f8c2960f.jpg"></div> 
+<div class="img"><img src="https://i.pinimg.com/736x/3c/fd/40/3cfd40d9da71424ccfdb4a4f23d24b15.jpg"></div> 
+<div class="img"><img src="https://i.pinimg.com/736x/b3/a9/ea/b3a9eacf0a48d73daf7a9d99a641358d.jpg"></div> 
+<div class="img"><img src="https://i.pinimg.com/1200x/ea/7d/64/ea7d6422e60fd7d08a2f57e7a81f8db5.jpg"></div> 
+<div class="img"><img src="https://i.pinimg.com/1200x/df/e4/3e/dfe43e45689d1c604a3bdadc10ff6400.jpg"></div> 
+<div class="img"><img src="https://i.pinimg.com/1200x/83/a0/61/83a0611b7dffe9a845b371161da4a6ca.jpg"></div> 
+<div class="img"><img src="https://i.pinimg.com/736x/3b/30/71/3b30719fcf57e0fb4e4c7875c123be89.jpg"></div> 
+<div class="img"><img src="https://i.pinimg.com/1200x/e6/9e/b6/e69eb622ea968f2d107bc5bce20aab71.jpg"></div> 
+<div class="img"><img src="https://i.pinimg.com/1200x/b8/f8/a0/b8f8a07bb42de63c8a03c136457535d4.jpg"></div> 
+<div class="img"><img src="https://i.pinimg.com/1200x/ce/8d/c9/ce8dc976c68aae6e5b6bf13f0b563de7.jpg"></div> 
+<div class="img"><img src="https://i.pinimg.com/736x/bb/02/06/bb0206c39dbae6728fe93e97ea7caff1.jpg"></div> 
+<div class="img"><img src="https://i.pinimg.com/736x/8d/70/95/8d7095181d12fd4452273eb2677a2ff4.jpg"></div> 
+<div class="img"><img src="https://i.pinimg.com/736x/e4/3c/3c/e43c3c3f9bb348d26be1abd4eefbe2b7.jpg"></div> 
+<div class="img"><img src="https://i.pinimg.com/736x/96/e1/ea/96e1eac3c1ccb9c7817cfd83e5d3c113.jpg"></div> 
+<div class="img"><img src="https://i.pinimg.com/1200x/60/7c/14/607c144c8ed65de6179e9dcb43d0a949.jpg"></div> 
+<div class="img"><img src="https://i.pinimg.com/736x/cf/a9/46/cfa94611e77bece6cb69df26f7d27c5c.jpg"></div> 
+<div class="img"><img src="https://i.pinimg.com/736x/04/89/04/048904227df6ca36de30a4d0b874eaa4.jpg"></div> 
+<div class="img"><img src="https://i.pinimg.com/1200x/77/ed/6f/77ed6fa44994de79cf59d92881cad332.jpg"></div> 
+<div class="img"><img src="https://i.pinimg.com/1200x/b5/83/42/b583427440c3b45fb0624961bfc8ea66.jpg"></div> 
+<div class="img"><img src="https://i.pinimg.com/1200x/dc/ee/8b/dcee8b92e1f9f766abe289dec5c54d85.jpg"></div> 
+<div class="img"><img src="https://i.pinimg.com/736x/42/61/90/42619054f77a6e8cbbe20181b93027fd.jpg"></div> 
+<div class="img"><img src="https://i.pinimg.com/736x/b6/ce/95/b6ce9557d1937922cdcc84d4abcb8143.jpg"></div> 
+<div class="img"><img src="https://i.pinimg.com/1200x/a2/00/3f/a2003f95fde2cf6615a484ce3e43b33f.jpg"></div> 
+<div class="img cover"><img src="https://wallpapercave.com/wp/wp5335654.jpg"></div> 
+</div> 
+</div> 
 
-    <script>
-        window.addEventListener("load", () => {
-            const master = gsap.timeline();
+<!-- 3. OUTRO --> 
+<div class="outro"> 
+<h1>Welcome to Mariposa Tour</h1> 
+</div> 
 
-            // 1. Matikan Preloader (sinkron dengan durasi animasi CSS)
-            master.to("#preloader", {
-                opacity: 0,
-                duration: 1,
-                delay: 2.8, 
-                onComplete: () => {
-                    document.getElementById("preloader").style.display = "none";
-                }
-            });
+<script> 
+window.addEventListener("load", () => { 
+const master = gsap.timeline(); 
 
-            // 2. Setup Flow Animation
-            const images = gsap.utils.toArray('.flow .img');
-            const positions = [
-                { x: -0.8, y: -0.6 }, { x: 0.7, y: 0.4 }, { x: -0.5, y: 0.7 },
-                { x: 0.6, y: -0.5 }, { x: -0.8, y: 0.2 }, { x: 0.8, y: -0.3 },
-                { x: -0.6, y: -0.8 }, { x: 0.4, y: 0.6 }, { x: -0.7, y: 0.5 },
-                { x: 0.5, y: -0.7 }, { x: -0.4, y: -0.4 }, { x: 0.3, y: 0.8 },
-                { x: -0.8, y: 0.3 }, { x: 0.6, y: 0.2 }, { x: -0.2, y: -0.7 },
-                { x: 0.7, y: -0.6 }, { x: -0.5, y: 0.4 }, { x: 0.4, y: -0.4 },
-                { x: -0.6, y: 0.6 }, { x: 0.8, y: 0.5 }, { x: -0.3, y: -0.5 },
-                { x: 0.5, y: 0.3 }, { x: -0.7, y: -0.2 }, { x: 0.2, y: 0.7 },
-                { x: -0.4, y: 0.8 }, { x: 0.6, y: -0.8 }, { x: -0.8, y: 0.1 },
-                { x: 0, y: 0 }
-            ];
+// 1. Preloader Fade Out
+master.to("#preloader", { 
+opacity: 0, 
+duration: 1, 
+delay: 2.8, 
+onComplete: () => { 
+document.getElementById("preloader").style.display = "none"; 
+} 
+}); 
 
-            const screenHeight = window.innerHeight;
-            const screenWidth = window.innerWidth;
-            const isMobile = screenWidth < 800;
-            const spread = isMobile ? 1.2 : 0.8;
+// 2. Setup Flow Animation 
+const images = gsap.utils.toArray('.flow .img'); 
+const positions = [ 
+{ x: -0.8, y: -0.6 }, { x: 0.7, y: 0.4 }, { x: -0.5, y: 0.7 }, 
+{ x: 0.6, y: -0.5 }, { x: -0.8, y: 0.2 }, { x: 0.8, y: -0.3 }, 
+{ x: -0.6, y: -0.8 }, { x: 0.4, y: 0.6 }, { x: -0.7, y: 0.5 }, 
+{ x: 0.5, y: -0.7 }, { x: -0.4, y: -0.4 }, { x: 0.3, y: 0.8 }, 
+{ x: -0.8, y: 0.3 }, { x: 0.6, y: 0.2 }, { x: -0.2, y: -0.7 }, 
+{ x: 0.7, y: -0.6 }, { x: -0.5, y: 0.4 }, { x: 0.4, y: -0.4 }, 
+{ x: -0.6, y: 0.6 }, { x: 0.8, y: 0.5 }, { x: -0.3, y: -0.5 }, 
+{ x: 0.5, y: 0.3 }, { x: -0.7, y: -0.2 }, { x: 0.2, y: 0.7 }, 
+{ x: -0.4, y: 0.8 }, { x: 0.6, y: -0.8 }, { x: -0.8, y: 0.1 }, 
+{ x: 0, y: 0 } 
+]; 
 
-            gsap.set(".flow", { visibility: "visible" });
-            gsap.set(images, { x: 0, y: 0, z: -5000, opacity: 0, scale: 0 });
+gsap.set(".flow", { visibility: "visible" }); 
+// Inisialisasi posisi awal di tengah dengan xPercent/yPercent
+gsap.set(images, { xPercent: -50, yPercent: -50, x: 0, y: 0, z: -5000, opacity: 0, scale: 0 }); 
 
-            const flowTl = gsap.timeline({ defaults: { ease: "power1.in" } });
+const flowTl = gsap.timeline({ defaults: { ease: "power1.in" } }); 
 
-            flowTl.to(".flow .section-text p", { opacity: 1, duration: 1 });
-            flowTl.to(".flow .section-text", { opacity: 0, duration: 0.5, delay: 0.5 });
+flowTl.to(".flow .section-text p", { opacity: 1, duration: 1 }); 
+flowTl.to(".flow .section-text", { opacity: 0, duration: 0.5, delay: 0.5 }); 
 
-            images.forEach((img, index) => {
-                const isLast = index === images.length - 1;
-                flowTl.to(img, {
-                    x: isLast ? 0 : positions[index].x * screenWidth * spread,
-                    y: isLast ? 0 : positions[index].y * screenHeight * spread,
-                    z: isLast ? 0 : 3000,
-                    opacity: 1,
-                    scale: 1,
-                    duration: 1.2
-                }, ">-1.1");
-            });
+images.forEach((img, index) => { 
+const isLast = index === images.length - 1; 
 
-            // 4. Outro
-            flowTl.to(".outro", {
-                opacity: 1,
-                duration: 1,
-                onStart: () => { 
-                    document.body.style.overflowY = "auto"; 
-                    document.body.style.overflowX = "hidden";
-                }
-            }, "-=0.3");
+flowTl.to(img, { 
+// Jika terakhir, tetap di -50% (Tengah). Jika bukan, sebar berdasarkan koordinat.
+xPercent: isLast ? -50 : (positions[index].x * 150), 
+yPercent: isLast ? -50 : (positions[index].y * 150), 
+z: isLast ? 0 : 3000, 
+opacity: 1, 
+scale: 1, 
+duration: 1.2 
+}, ">-1.1"); 
+}); 
 
-            master.add(flowTl);
-        });
-    </script>
-</body>
+// 3. Outro Reveal
+flowTl.to(".outro", { 
+opacity: 1, 
+duration: 1, 
+onStart: () => { 
+document.body.style.overflowY = "auto"; 
+document.body.style.overflowX = "hidden"; 
+} 
+}, "-=0.3"); 
+
+master.add(flowTl); 
+}); 
+</script> 
+</body> 
 </html>
