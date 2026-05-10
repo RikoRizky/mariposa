@@ -1,314 +1,478 @@
-<!DOCTYPE html> 
-<html lang="id"> 
+<!DOCTYPE html>
+<html lang="id">
 
-<head> 
-<meta charset="UTF-8"> 
-<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-<title>Mariposa Tour - Indonesia</title> 
-<!-- Fonts --> 
-<link rel="preconnect" href="https://fonts.googleapis.com"> 
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
-<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400;600;900&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;700&display=swap" rel="stylesheet"> 
-<!-- GSAP Core --> 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script> 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mariposa Tour x CPC Travel</title>
 
-<style> 
-:root { 
---bg-color: #ffffff; 
---text-color: #000000; 
---accent-color: #0088cc; 
---gold-accent: #d4af37;
-} 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400;600;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;800&display=swap" rel="stylesheet">
 
-body, html { 
-margin: 0; padding: 0; 
-width: 100%; height: 100%; 
-background-color: #1c1c1c; 
-overflow: hidden; 
-font-family: 'Inter', sans-serif; 
-} 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
-/* --- PRELOADER (Tetap Sama) --- */ 
-.wrapper { 
-position: fixed; inset: 0; z-index: 99999; 
-display: flex; flex-direction: column; align-items: center; justify-content: center; 
-background: var(--bg-color); 
-} 
+  <style>
+    /* --- CSS MARIPOSA (UTUH) --- */
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #000000;
+      --accent-color: #0088cc;
+      --black: #242424;
+      --white: #f5f5f5;
+      --pill: #e0d4be;
+      --red: #cc033f;
+    }
 
-.svg-container { width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; } 
-@media (max-width: 768px) { 
-    .svg-container svg { width: 100%; height: auto; transform: scale(2.5); transform-origin: center; } 
-    .text-name { font-size: 45px !important; } 
-    .text-title { font-size: 30px !important; letter-spacing: 12px !important; } 
-} 
+    body, html {
+      margin: 0; padding: 0;
+      width: 100%; height: 100%;
+      background-color: #1c1c1c;
+      overflow: hidden;
+      font-family: 'Poppins', sans-serif;
+    }
 
-.animated-content { transform-origin: 960px 540px; animation: cinematicReveal 2.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; } 
-.line-anim { opacity: 0; animation: growLine 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.5s; } 
-.text-slide-anim { opacity: 0; animation: slideRight 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.8s; } 
-.text-name { font-family: 'Raleway', sans-serif; font-weight: 900; font-size: 72px; fill: var(--text-color); } 
-.text-title { font-family: 'Raleway', sans-serif; font-weight: 400; font-size: 24px; letter-spacing: 16px; fill: var(--accent-color); } 
+    .wrapper {
+      position: fixed; inset: 0; z-index: 99999;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      background: var(--bg-color);
+    }
 
-@keyframes cinematicReveal { 0% { transform: scale(1.5); opacity: 0; filter: blur(20px); } 100% { transform: scale(1); opacity: 1; filter: blur(0px); } } 
-@keyframes growLine { 0% { transform: scaleY(0); opacity: 0; transform-origin: center; } 100% { transform: scaleY(1); opacity: 1; transform-origin: center; } } 
-@keyframes slideRight { 0% { transform: translateX(-50px); opacity: 0; } 100% { transform: translateX(0); opacity: 1; } } 
-.flash-overlay { fill: #ffffff; animation: fadeOutFlash 1.5s ease-out forwards; } 
-@keyframes fadeOutFlash { 0% { opacity: 1; } 100% { opacity: 0; pointer-events: none; } } 
+    .svg-container { width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; }
 
-/* --- FLOW IMAGES (Tetap Sama) --- */ 
-.flow { height: 100vh; width: 100vw; position: fixed; top: 0; left: 0; background: #1c1c1c; overflow: hidden; visibility: hidden; z-index: 10;} 
-.flow-images { position: absolute; top: 0; left: 0; width: 100%; height: 100%; transform-style: preserve-3d; perspective: 2000px; } 
-.flow .img { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 500px; height: 350px; will-change: transform, opacity; } 
-@media (max-width: 1024px) { .flow .img { width: 400px; height: 280px; } } 
-@media (max-width: 600px) { .flow .img { width: 280px; height: 200px; } } 
-.flow .img img { width: 100%; height: 100%; object-fit: cover; border-radius: 4px; } 
-.flow .img.cover { width: 100% !important; height: 100% !important; z-index: 50; } 
-.flow .img.cover::after { content: ""; position: absolute; inset: 0; background: rgba(0, 0, 0, 0.4); } 
-.section-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 100; text-align: center; color: #ffffff; font-family: 'Instrument Serif', serif; width: 90%; pointer-events: none; } 
-.section-text p { font-size: clamp(1.5rem, 5vw, 2.5rem); letter-spacing: 0.2em; opacity: 0; } 
+    @media (max-width: 768px) {
+      .svg-container svg { width: 100%; height: auto; transform: scale(2.5); transform-origin: center; }
+      .text-name { font-size: 45px !important; }
+      .text-title { font-size: 30px !important; letter-spacing: 12px !important; }
+    }
 
-/* --- LANDING PAGE NEW STYLE (BYD STYLE) --- */ 
-.outro { 
-    min-height: 100vh; width: 100vw; 
-    background: url('https://wallpapercave.com/wp/wp5335654.jpg') no-repeat center center/cover; 
-    position: relative; z-index: 200; opacity: 0; 
-    color: white; overflow-x: hidden;
-} 
+    .animated-content { transform-origin: 960px 540px; animation: cinematicReveal 2.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
+    .line-anim { opacity: 0; animation: growLine 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.5s; }
+    .text-slide-anim { opacity: 0; animation: slideRight 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.8s; }
+    .text-name { font-family: 'Raleway', sans-serif; font-weight: 900; font-size: 72px; fill: var(--text-color); }
+    .text-title { font-family: 'Raleway', sans-serif; font-weight: 400; font-size: 24px; letter-spacing: 16px; fill: var(--accent-color); }
 
-.overlay-dark {
-    position: absolute; inset: 0;
-    background: linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.4) 100%);
-}
+    @keyframes cinematicReveal { 0% { transform: scale(1.5); opacity: 0; filter: blur(20px); } 100% { transform: scale(1); opacity: 1; filter: blur(0px); } }
+    @keyframes growLine { 0% { transform: scaleY(0); opacity: 0; transform-origin: center; } 100% { transform: scaleY(1); opacity: 1; transform-origin: center; } }
+    @keyframes slideRight { 0% { transform: translateX(-50px); opacity: 0; } 100% { transform: translateX(0); opacity: 1; } }
+    .flash-overlay { fill: #ffffff; animation: fadeOutFlash 1.5s ease-out forwards; }
+    @keyframes fadeOutFlash { 0% { opacity: 1; } 100% { opacity: 0; pointer-events: none; } }
 
-/* Navbar */
-nav {
-    position: absolute; top: 0; width: 100%; padding: 30px 60px;
-    display: flex; justify-content: space-between; align-items: center;
-    box-sizing: border-box; z-index: 10;
-}
-.logo { font-weight: 800; font-size: 24px; letter-spacing: 2px; }
-.nav-links { display: flex; gap: 30px; list-style: none; }
-.nav-links a { text-decoration: none; color: white; font-size: 13px; font-weight: 600; text-transform: uppercase; opacity: 0.8; transition: 0.3s; }
-.nav-links a:hover, .nav-links a.active { opacity: 1; border-bottom: 2px solid var(--gold-accent); padding-bottom: 5px; }
+    .flow { height: 100vh; width: 100vw; position: fixed; top: 0; left: 0; background: #1c1c1c; overflow: hidden; visibility: hidden; z-index: 9998; }
+    .flow-images { position: absolute; top: 0; left: 0; width: 100%; height: 100%; transform-style: preserve-3d; perspective: 2000px; }
+    .flow .img { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 500px; height: 350px; will-change: transform, opacity; }
 
-/* Main Content */
-.hero-content {
-    position: relative; z-index: 5;
-    padding: 15% 60px 0;
-    max-width: 600px;
-}
-.hero-content h4 { font-weight: 400; margin: 0; letter-spacing: 2px; opacity: 0.9; }
-.hero-content h1 { font-size: 80px; font-weight: 800; margin: 10px 0; line-height: 0.9; }
-.hero-content p { font-size: 14px; line-height: 1.6; color: #ccc; margin-bottom: 30px; border-left: 2px solid var(--gold-accent); padding-left: 15px; }
+    @media (max-width: 1024px) { .flow .img { width: 400px; height: 280px; } }
+    @media (max-width: 600px) { .flow .img { width: 280px; height: 200px; } }
 
-.btn-container { display: flex; align-items: center; gap: 20px; }
-.btn-main { 
-    padding: 12px 35px; border: 1px solid white; border-radius: 30px; 
-    color: white; text-decoration: none; text-transform: uppercase; font-size: 12px; font-weight: 700;
-    transition: 0.3s;
-}
-.btn-main:hover { background: white; color: black; }
-.btn-icon { background: var(--gold-accent); width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+    .flow .img img { width: 100%; height: 100%; object-fit: cover; border-radius: 4px; }
+    .flow .img.cover { width: 100% !important; height: 100% !important; z-index: 50; }
+    .flow .img.cover::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.3)); }
 
-/* Cards Section */
-.car-cards {
-    position: absolute; bottom: 50px; right: 60px;
-    display: flex; gap: 20px; z-index: 5;
-}
-.card {
-    width: 220px; height: 300px;
-    background-size: cover; background-position: center;
-    border-radius: 15px; position: relative;
-    overflow: hidden; border: 1px solid rgba(255,255,255,0.1);
-}
-.card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, black, transparent); }
-.card-info { position: absolute; bottom: 20px; left: 20px; z-index: 2; }
-.card-info span { font-size: 10px; opacity: 0.7; }
-.card-info h3 { margin: 5px 0 0; font-size: 18px; }
+    .section-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 100; text-align: center; color: #ffffff; font-family: 'Instrument Serif', serif; width: 90%; pointer-events: none; }
+    .section-text p { font-size: clamp(1.5rem, 5vw, 2.5rem); letter-spacing: 0.2em; opacity: 0; }
 
-/* Scroll Down Icon */
-.scroll-down {
-    position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
-    width: 40px; height: 40px; border: 1px solid rgba(255,255,255,0.3);
-    border-radius: 50%; display: flex; align-items: center; justify-content: center;
-}
-
-/* WhatsApp Float */
-.wa-float {
-    position: fixed; bottom: 30px; right: 30px;
-    background: #25d366; width: 60px; height: 60px;
-    border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    z-index: 1000; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-}
-
-@media (max-width: 900px) {
-    nav { padding: 20px; }
-    .nav-links { display: none; }
-    .hero-content { padding: 120px 20px 0; text-align: center; }
-    .hero-content h1 { font-size: 50px; }
-    .car-cards { display: none; }
-    .hero-content p { border-left: none; padding-left: 0; }
-    .btn-container { justify-content: center; }
-}
-</style> 
-</head> 
-
-<body> 
-
-<!-- 1. PRELOADER --> 
-<div id="preloader" class="wrapper"> 
-<div class="svg-container"> 
-<svg viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid meet"> 
-<defs> 
-<clipPath id="reveal-mask"> 
-<rect x="940" y="200" width="1000" height="700" /> 
-</clipPath> 
-</defs> 
-<rect width="1920" height="1080" fill="#ffffff" /> 
-<g class="animated-content"> 
-<!-- Ganti logobg.png dengan placeholder jika tidak ada filenya -->
-<rect x="520" y="340" width="450" height="400" fill="#f0f0f0" rx="20"/>
-<text x="745" y="550" font-family="Raleway" font-weight="900" font-size="40" text-anchor="middle">LOGO</text>
-<line class="line-anim" x1="960" y1="440" x2="960" y2="620" stroke="#111111" stroke-width="3" /> 
-<g clip-path="url(#reveal-mask)"> 
-<g transform="translate(1000, 530)"> 
-<g class="text-slide-anim"> 
-<text class="text-name" x="0" y="10">Mariposa Tour</text> 
-<text class="text-title" x="5" y="65">Indonesia</text> 
-</g> 
-</g> 
-</g> 
-</g> 
-<rect class="flash-overlay" width="1920" height="1080" /> 
-</svg> 
-</div> 
-</div> 
-
-<!-- 2. FLOW ANIMATION --> 
-<div class="flow"> 
-<div class="section-text"> 
-<p>EXPLORE THE BEAUTY</p> 
-</div> 
-<div class="flow-images"> 
-<div class="img"><img src="https://images.unsplash.com/photo-1501179691627-eeaa65ea017c?q=80&w=2070&auto=format&fit=crop"></div> 
-<div class="img"><img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=2076&auto=format&fit=crop"></div> 
-<div class="img"><img src="https://images.unsplash.com/photo-1537953391147-f459c0d38100?q=80&w=2050&auto=format&fit=crop"></div> 
-<!-- ... Sisanya bisa kamu tambahkan sendiri seperti kode awal ... -->
-<div class="img cover"><img src="https://wallpapercave.com/wp/wp5335654.jpg"></div> 
-</div> 
-</div> 
-
-<!-- 3. NEW LANDING PAGE (Replacing Outro) --> 
-<div class="outro"> 
-    <div class="overlay-dark"></div>
+    /* --- CSS LANDING PAGE (DIOPTIMALKAN) --- */
+    #landing-page-content {
+      opacity: 0;
+      visibility: hidden;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      background-color: var(--white);
+    }
     
-    <nav>
-        <div class="logo">BYD | HARMONY AUTO</div>
-        <ul class="nav-links">
-            <li><a href="#" class="active">HOME</a></li>
-            <li><a href="#">TENTANG KAMI</a></li>
-            <li><a href="#">MODEL</a></li>
-            <li><a href="#">TESTIMONI</a></li>
-            <li><a href="#">TEST DRIVE</a></li>
+    .page-wrap { position: relative; width: 100%; height: 100%; }
+    header { width: 100%; height: 100vh; overflow: hidden; }
+    
+    nav { 
+      margin-top: 25px; width: 100%; position: fixed; z-index: 100; 
+      padding: 1em 5em; display: flex; justify-content: space-between; align-items: center;
+    }
+    nav h1 { 
+      font-size: 1.3rem; font-weight: normal; text-transform: uppercase; 
+      color: var(--pill); background-color: var(--red); padding: 5px 10px; margin: 0;
+    }
+    nav ul { display: flex; color: var(--white); list-style: none; margin: 0; padding: 0; align-items: center; }
+    nav ul li:not(#burger) { margin-right: 1.5em; font-size: 0.9rem; text-transform: uppercase; cursor: pointer; }
+
+    #burger { width: 22px; height: 18px; display: flex; flex-direction: column; justify-content: space-between; cursor: pointer; }
+    #burger span { display: block; height: 2px; width: 100%; background-color: var(--red); border-radius: 10px; transition: transform 0.3s; }
+    .active span:nth-of-type(1) { transform: translateY(8px) rotate(45deg); }
+    .active span:nth-of-type(2) { opacity: 0; }
+    .active span:nth-of-type(3) { transform: translateY(-8px) rotate(-45deg); }
+
+    main { width: 100vw; height: 100vh; position: relative; overflow: hidden; }
+    article { width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: var(--i); }
+    
+    .hero-info { position: absolute; top: 50%; left: 5%; transform: translateY(-50%); z-index: 8; pointer-events: none; }
+    .hero-info h2 { 
+      font-size: clamp(2rem, 9vw, 5rem); line-height: 1; text-transform: uppercase; 
+      color: transparent; -webkit-text-stroke: 1.5px var(--pill); margin: 0;
+    }
+    .hero-info h1 { 
+      color: var(--white); font-size: clamp(3.2rem, 10vw, 7rem); line-height: 1; 
+      text-transform: uppercase; font-weight: 800; margin: 0;
+    }
+    .hero-info h3 { color: var(--white); font-size: 1.1rem; font-weight: normal; margin-top: 1.5em; letter-spacing: 2px; }
+    
+    .hero-image { 
+      width: 100%; height: 100%; background-size: cover; background-position: center; 
+      clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%); 
+    }
+
+    .hi-1 { background-image: url("https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=2070&q=80"); }
+    .hi-2 { background-image: url("https://images.unsplash.com/photo-1517057011470-8f36d636e6ca?auto=format&fit=crop&w=2070&q=80"); }
+    .hi-3 { background-image: url("https://images.unsplash.com/flagged/photo-1552035791-b3cc1632e933?auto=format&fit=crop&w=2069&q=80"); }
+    .hi-4 { background-image: url("https://images.unsplash.com/photo-1574700273608-7962d3602a9f?auto=format&fit=crop&w=2070&q=80"); }
+    .hi-5 { background-image: url("https://images.unsplash.com/photo-1605045544284-d13c6d6a60a6?auto=format&fit=crop&w=2070&q=80"); }
+
+    #overlay-menu { 
+      position: fixed; top: 0; left: 0; z-index: 99; min-height: 100vh; width: 100%; 
+      background-color: var(--white); clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%); 
+      display: none; padding: 100px 50px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="preloader" class="wrapper">
+    <div class="svg-container">
+      <svg viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <clipPath id="reveal-mask"><rect x="940" y="200" width="1000" height="700" /></clipPath>
+        </defs>
+        <rect width="1920" height="1080" fill="#ffffff" />
+        <g class="animated-content">
+          <image href="logobg.png" x="520" y="340" width="450" height="400" preserveAspectRatio="xMidYMid meet" />
+          <line class="line-anim" x1="960" y1="440" x2="960" y2="620" stroke="#111111" stroke-width="3" />
+          <g clip-path="url(#reveal-mask)">
+            <g transform="translate(1000, 530)">
+              <g class="text-slide-anim">
+                <text class="text-name" x="0" y="10">Mariposa Tour</text>
+                <text class="text-title" x="5" y="65">Indonesia</text>
+              </g>
+            </g>
+          </g>
+        </g>
+        <rect class="flash-overlay" width="1920" height="1080" />
+      </svg>
+    </div>
+  </div>
+
+  <div class="flow">
+    <div class="section-text"><p>EXPLORE THE BEAUTY</p></div>
+    <div class="flow-images">
+      <div class="img"><img src="https://i.pinimg.com/1200x/6d/c1/51/6dc151fccad84848851615bf7fd5273e.jpg"></div>
+      <div class="img"><img src="https://i.pinimg.com/736x/86/5b/37/865b37c273ce08ccba905cfd5c43f7fd.jpg"></div>
+      <div class="img"><img src="https://i.pinimg.com/1200x/8d/ff/a1/8dffa167d7c06c98303cf74e1e684c0c.jpg"></div>
+      <div class="img"><img src="https://i.pinimg.com/1200x/7a/9d/b3/7a9db3f4a8c14244c9799897c5b27e15.jpg"></div>
+      <div class="img"><img src="https://i.pinimg.com/1200x/92/6a/f6/926af63e63524d0b2b5d4d29f8c2960f.jpg"></div>
+      <div class="img"><img src="https://i.pinimg.com/736x/3c/fd/40/3cfd40d9da71424ccfdb4a4f23d24b15.jpg"></div>
+      <div class="img"><img src="https://i.pinimg.com/736x/b3/a9/ea/b3a9eacf0a48d73daf7a9d99a641358d.jpg"></div>
+      <div class="img"><img src="https://i.pinimg.com/1200x/ea/7d/64/ea7d6422e60fd7d08a2f57e7a81f8db5.jpg"></div>
+      <div class="img"><img src="https://i.pinimg.com/1200x/df/e4/3e/dfe43e45689d1c604a3bdadc10ff6400.jpg"></div>
+      <div class="img"><img src="https://i.pinimg.com/1200x/83/a0/61/83a0611b7dffe9a845b371161da4a6ca.jpg"></div>
+      <div class="img"><img src="https://i.pinimg.com/736x/3b/30/71/3b30719fcf57e0fb4e4c7875c123be89.jpg"></div>
+      <div class="img"><img src="https://i.pinimg.com/1200x/e6/9e/b6/e69eb622ea968f2d107bc5bce20aab71.jpg"></div>
+      <div class="img"><img src="https://i.pinimg.com/1200x/b8/f8/a0/b8f8a07bb42de63c8a03c136457535d4.jpg"></div>
+      <div class="img"><img src="https://i.pinimg.com/1200x/ce/8d/c9/ce8dc976c68aae6e5b6bf13f0b563de7.jpg"></div>
+      <!-- <div class="img"><img src="https://i.pinimg.com/736x/bb/02/06/bb0206c39dbae6728fe93e97ea7caff1.jpg"></div>
+      <div class="img"><img src="https://i.pinimg.com/736x/8d/70/95/8d7095181d12fd4452273eb2677a2ff4.jpg"></div>
+      <div class="img"><img src="https://i.pinimg.com/736x/e4/3c/3c/e43c3c3f9bb348d26be1abd4eefbe2b7.jpg"></div>
+      <div class="img"><img src="https://i.pinimg.com/736x/96/e1/ea/96e1eac3c1ccb9c7817cfd83e5d3c113.jpg"></div>
+      <div class="img"><img src="https://i.pinimg.com/1200x/60/7c/14/607c144c8ed65de6179e9dcb43d0a949.jpg"></div>
+      <div class="img"><img src="https://i.pinimg.com/736x/cf/a9/46/cfa94611e77bece6cb69df26f7d27c5c.jpg"></div>
+      <div class="img"><img src="https://i.pinimg.com/736x/04/89/04/048904227df6ca36de30a4d0b874eaa4.jpg"></div>
+      <div class="img"><img src="https://i.pinimg.com/1200x/77/ed/6f/77ed6fa44994de79cf59d92881cad332.jpg"></div>
+      <div class="img"><img src="https://i.pinimg.com/1200x/b5/83/42/b583427440c3b45fb0624961bfc8ea66.jpg"></div>
+      <div class="img"><img src="https://i.pinimg.com/1200x/dc/ee/8b/dcee8b92e1f9f766abe289dec5c54d85.jpg"></div>
+      <div class="img"><img src="https://i.pinimg.com/736x/42/61/90/42619054f77a6e8cbbe20181b93027fd.jpg"></div>
+      <div class="img"><img src="https://i.pinimg.com/736x/b6/ce/95/b6ce9557d1937922cdcc84d4abcb8143.jpg"></div>
+      <div class="img"><img src="https://i.pinimg.com/1200x/a2/00/3f/a2003f95fde2cf6615a484ce3e43b33f.jpg"></div> -->
+      <div class="img cover"><img src="https://i.pinimg.com/1200x/a2/00/3f/a2003f95fde2cf6615a484ce3e43b33f.jpg"></div>
+    </div>
+  </div>
+
+  <div id="landing-page-content">
+    <div class="page-wrap">
+      <header class="page-header">
+        <nav id="landing-nav">
+          <!-- <h1>CPC | Travel</h1> -->
+          <ul>
+            <li></li>
+            <li></li>
+            <li id="burger"><span></span><span></span><span></span></li>
+          </ul>
+        </nav>
+
+        <main>
+          <article id="hero-1" style="--i: 5">
+            <div class="hero-info">
+              <h2 class="hero-reveal">Travel the</h2>
+              <h1 class="hero-reveal">World</h1>
+              <h3 class="hero-reveal">Pragser Wildsee, Italy</h3>
+            </div>
+            <div class="hero-image hi-1"></div>
+          </article>
+          <article id="hero-2" style="--i: 4">
+            <div class="hero-info"><h2>Savour the</h2><h1>Journey</h1><h3>Marignier, France</h3></div>
+            <div class="hero-image hi-2"></div>
+          </article>
+          <article id="hero-3" style="--i: 3">
+            <div class="hero-info"><h2>Expand Your</h2><h1>Horizons</h1><h3>Hooker Valley, NZ</h3></div>
+            <div class="hero-image hi-3"></div>
+          </article>
+          <article id="hero-4" style="--i: 2">
+            <div class="hero-info"><h2>Explore and</h2><h1>Reflect</h1><h3>Dolmites, Italy</h3></div>
+            <div class="hero-image hi-4"></div>
+          </article>
+          <article id="hero-5" style="--i: 1">
+            <div class="hero-info"><h2>Change Your</h2><h1>Perspective</h1><h3>Phuket, Thailand</h3></div>
+            <div class="hero-image hi-5"></div>
+          </article>
+        </main>
+      </header>
+      
+      <section id="overlay-menu">
+       <ul class="level-1">
+      <li>
+        <h3>Destinations</h3>
+        <ul class="level-2">
+          <li>
+            <p>Asia</p>
+            <ul class="level-3">
+              <li>Bali</li>
+              <li>Cambodia</li>
+              <li>Georgia</li>
+              <li>India</li>
+              <li>Indonesia</li>
+              <li>Laos</li>
+              <li>Malaysia</li>
+              <li>Maldives</li>
+              <li>Myanmar</li>
+              <li>Philippines</li>
+              <li>Singapore</li>
+              <li>Sri Lanka</li>
+              <li>Thailand</li>
+              <li>Uzbekistan</li>
+              <li>Vietnam</li>
+            </ul>
+          </li>
+          <li>
+            <p>Europe</p>
+            <ul class="level-3">
+              <li>Czech Republic</li>
+              <li>France</li>
+              <li>Georgia</li>
+              <li>Greece</li>
+              <li>Hungary</li>
+              <li>Iceland</li>
+              <li>Italy</li>
+              <li>Malta</li>
+              <li>Netherlands</li>
+              <li>Poland</li>
+              <li>Portugal</li>
+              <li>Spain</li>
+              <li>Turkey</li>
+            </ul>
+          </li>
+          <li>
+            <p>Africa</p>
+            <ul class="level-3">
+              <li>Egypt</li>
+              <li>Maurtius</li>
+              <li>Morocco</li>
+            </ul>
+          </li>
+          <li>
+            <p>Middle East</p>
+            <ul class="level-3">
+              <li>Egypt</li>
+              <li>Jordan</li>
+              <li>Oman</li>
+              <li>Turkey</li>
+            </ul>
+          </li>
         </ul>
-    </nav>
-
-    <div class="hero-content">
-        <h4>BYD Harmony Cirebon</h4>
-        <h1>BYD <br> SEAL</h1>
-        <p>SEAL: Ocean Smart Comfy Cabin yang meningkatkan pengalaman berkendara. Kabin dilengkapi Layar Sentuh Putar Adaptif 15,6 inci dan Panoramic Glass Roof.</p>
-        
-        <div class="btn-container">
-            <div class="btn-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg>
-            </div>
-            <a href="#" class="btn-main">Lihat Selengkapnya</a>
-        </div>
+      </li>
+      <li>
+        <h3>Travel Tips</h3>
+        <ul>
+          <li>Going on a trip</li>
+          <li>Travel Insurance</li>
+          <li>Working abroad</li>
+          <li>Saving</li>
+          <li>Instagram tips</li>
+        </ul>
+        <p><small>More tips...</small></p>
+      </li>
+      <li>
+        <h3>Resources</h3>
+        <ul>
+          <li>Personalised travel advice</li>
+          <li>Where we book our travels</li>
+          <li>Become a booking agent</li>
+        </ul>
+        <p><small>More resources...</small></p>
+      </li>
+      <li>
+        <h3>About Us</h3>
+        <ul>
+          <li>Our story</li>
+          <li>Work with us</li>
+          <li>Instagram</li>
+          <li>YouTube</li>
+        </ul>
+      </li>
+    </ul>
+      </section>
     </div>
+  </div>
 
-    <div class="car-cards">
-        <div class="card" style="background-image: url('https://images.unsplash.com/photo-1617788138017-80ad40651399?q=80&w=2070&auto=format&fit=crop');">
-            <div class="card-info">
-                <span>BYD Harmony Cirebon</span>
-                <h3>BYD ATTO 3</h3>
-            </div>
-        </div>
-        <div class="card" style="background-image: url('https://images.unsplash.com/photo-1603386329225-868f9b1ee6c9?q=80&w=2069&auto=format&fit=crop');">
-            <div class="card-info">
-                <span>BYD Harmony Cirebon</span>
-                <h3>BYD SEALION 7</h3>
-            </div>
-        </div>
-    </div>
+  <script>
+    window.addEventListener("load", () => {
+      const master = gsap.timeline();
 
-    <div class="scroll-down">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M7 13l5 5 5-5M7 6l5 5 5-5"/></svg>
-    </div>
+      // --- 1. ANIMASI PRELOADER ---
+      master.to("#preloader", {
+        opacity: 0,
+        duration: 1,
+        delay: 2.8,
+        ease: "power2.inOut",
+        onComplete: () => {
+          document.getElementById("preloader").style.display = "none";
+        }
+      });
 
-    <a href="https://wa.me/yournumber" class="wa-float">
-        <svg width="35" height="35" viewBox="0 0 24 24" fill="white"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.246 2.248 3.484 5.232 3.484 8.412 0 6.556-5.338 11.892-11.893 11.892-1.997-.001-3.951-.5-5.688-1.448l-6.309 1.656zm6.29-4.115l.356.212c1.45.862 3.12 1.317 4.832 1.318 5.163 0 9.366-4.203 9.366-9.366s-4.203-9.367-9.367-9.367c-5.163 0-9.365 4.204-9.365 9.367 0 2.008.643 3.96 1.859 5.581l.232.312-.993 3.626 3.718-.975z"/></svg>
-    </a>
-</div> 
+      // --- 2. SETUP FLOW ANIMATION ---
+      const images = gsap.utils.toArray('.flow .img');
+      const positions = [
+        { x: -0.8, y: -0.6 }, { x: 0.7, y: 0.4 }, { x: -0.5, y: 0.7 },
+        { x: 0.6, y: -0.5 }, { x: -0.8, y: 0.2 }, { x: 0.8, y: -0.3 },
+        { x: -0.6, y: -0.8 }, { x: 0.4, y: 0.6 }, { x: -0.7, y: 0.5 },
+        { x: 0.5, y: -0.7 }, { x: -0.4, y: -0.4 }, { x: 0.3, y: 0.8 },
+        { x: -0.8, y: 0.3 }, { x: 0.6, y: 0.2 }, { x: -0.2, y: -0.7 },
+        { x: 0.7, y: -0.6 }, { x: -0.5, y: 0.4 }, { x: 0.4, y: -0.4 },
+        { x: -0.6, y: 0.6 }, { x: 0.8, y: 0.5 }, { x: -0.3, y: -0.5 },
+        { x: 0.5, y: 0.3 }, { x: -0.7, y: -0.2 }, { x: 0.2, y: 0.7 },
+        { x: -0.4, y: 0.8 }, { x: 0.6, y: -0.8 }, { x: -0.8, y: 0.1 },
+        { x: 0, y: 0 }
+      ];
 
-<script> 
-window.addEventListener("load", () => { 
-    const master = gsap.timeline(); 
+      gsap.set(".flow", { visibility: "visible" });
+      gsap.set(images, { xPercent: -50, yPercent: -50, z: -5000, opacity: 0, scale: 0 });
 
-    // 1. Preloader Fade Out (Tetap Sama)
-    master.to("#preloader", { 
-        opacity: 0, 
-        duration: 1, 
-        delay: 2.8, 
-        onComplete: () => { 
-            document.getElementById("preloader").style.display = "none"; 
-        } 
-    }); 
+      const flowTl = gsap.timeline({ defaults: { ease: "power2.inOut" } });
 
-    // 2. Setup Flow Animation (Tetap Sama)
-    const images = gsap.utils.toArray('.flow .img'); 
-    const positions = [ 
-        { x: -0.8, y: -0.6 }, { x: 0.7, y: 0.4 }, { x: -0.5, y: 0.7 }, 
-        { x: 0.6, y: -0.5 }, { x: -0.8, y: 0.2 }, { x: 0.8, y: -0.3 }, 
-        { x: -0.6, y: -0.8 }, { x: 0.4, y: 0.6 }, { x: -0.7, y: 0.5 }, 
-        { x: 0.5, y: -0.7 }, { x: -0.4, y: -0.4 }, { x: 0.3, y: 0.8 }, 
-        { x: 0, y: 0 } 
-    ]; 
+      flowTl.to(".flow .section-text p", { opacity: 1, duration: 1.2 })
+            .to(".flow .section-text", { opacity: 0, duration: 0.8, delay: 0.5 });
 
-    gsap.set(".flow", { visibility: "visible" }); 
-    gsap.set(images, { xPercent: -50, yPercent: -50, x: 0, y: 0, z: -5000, opacity: 0, scale: 0 }); 
-
-    const flowTl = gsap.timeline({ defaults: { ease: "power1.in" } }); 
-
-    flowTl.to(".flow .section-text p", { opacity: 1, duration: 1 }); 
-    flowTl.to(".flow .section-text", { opacity: 0, duration: 0.5, delay: 0.5 }); 
-
-    images.forEach((img, index) => { 
-        const isLast = index === images.length - 1; 
-        flowTl.to(img, { 
-            xPercent: isLast ? -50 : (positions[index]?.x * 150 || 0), 
-            yPercent: isLast ? -50 : (positions[index]?.y * 150 || 0), 
-            z: isLast ? 0 : 3000, 
-            opacity: 1, 
-            scale: 1, 
-            duration: 1.2 
-        }, ">-1.1"); 
-    }); 
-
-    // 3. Outro Reveal (Landing Page BYD)
-    flowTl.to(".outro", { 
+      images.forEach((img, index) => { 
+    const isLast = index === images.length - 1; 
+    
+    flowTl.to(img, { 
+        // Perbaikan: Gunakan xPercent dan yPercent agar tidak bentrok dengan nilai x dan y
+        xPercent: isLast ? -50 : (positions[index].x * 150), 
+        yPercent: isLast ? -50 : (positions[index].y * 150),
+        x: 0, // Memastikan x statis di 0
+        y: 0, // Memastikan y statis di 0
+        z: isLast ? 0 : 3500, 
         opacity: 1, 
-        duration: 1.5, 
-        onStart: () => { 
-            document.body.style.overflowY = "auto"; 
-            document.body.style.overflowX = "hidden"; 
-            // Animasi elemen internal landing page
-            gsap.from("nav", { y: -50, opacity: 0, duration: 1 });
-            gsap.from(".hero-content > *", { x: -100, opacity: 0, stagger: 0.2, duration: 1 });
-            gsap.from(".card", { y: 100, opacity: 0, stagger: 0.2, duration: 1, delay: 0.5 });
-        } 
-    }, "-=0.5"); 
+        scale: 1, 
+        duration: 1.2 
+    }, ">-1.05"); 
+});
 
-    master.add(flowTl); 
-}); 
-</script> 
-</body> 
+      /* --- BAGIAN SCRIPT TRANSISI YANG DIPERBARUI --- */
+
+// 3. TRANSISI SINEMATIK "EXCLUSVE REVEAL"
+// Zoom gambar cover seolah-olah kamera masuk ke dalam foto
+flowTl.to(".flow .img.cover img", {
+  scale: 1.4,          // Zoom-in lebih dalam untuk efek immersive
+  duration: 1.8,       // Durasi yang pas, tidak terlalu lambat
+  filter: "blur(10px)", // Menambahkan blur saat mendekat ke kamera
+  ease: "power2.in"    // Semakin cepat saat mendekati transisi
+}, "-=0.2");
+
+// Reveal Landing Page dengan efek Scale-Down (dari besar ke normal)
+flowTl.to("#landing-page-content", {
+  visibility: "visible",
+  opacity: 1,
+  scale: 1,            // Kembali ke ukuran normal
+  duration: 1.2,
+  ease: "expo.out",    // Efek halus yang sangat premium
+  startAt: { scale: 1.1, opacity: 0 }, // Mulai dari sedikit lebih besar
+  onStart: () => {
+    // Animasi Header & Navigasi (Muncul dari atas dengan halus)
+    gsap.from("#landing-nav", { 
+      y: -80, 
+      opacity: 0, 
+      duration: 1.5, 
+      ease: "expo.out" 
+    });
+
+    // Animasi Teks Hero (Efek reveal dari bawah)
+    gsap.from(".hero-reveal", { 
+      y: 120, 
+      opacity: 0, 
+      duration: 1.8, 
+      stagger: 0.15, 
+      ease: "expo.out" 
+    });
+    
+    initLandingSlider();
+  }
+}, "-=1.2"); // Overlap dengan zoom gambar cover
+
+// Hilangkan layer flow sepenuhnya setelah transisi selesai
+flowTl.to(".flow", { display: "none" });
+
+      master.add(flowTl);
+    });
+
+    // --- LOGIKA SLIDER (UTUH DARI SCRIPT ANDA) ---
+    function initLandingSlider() {
+      let burger = document.getElementById("burger");
+      let overlay = document.getElementById("overlay-menu");
+      let showMenu = false;
+      let del = 3;
+      let i = 1;
+
+      burger.onclick = () => {
+        showMenu = !showMenu;
+        if (showMenu) {
+          burger.classList.add("active");
+          overlay.style.display = "block";
+          gsap.to(overlay, 1, { clipPath: "polygon(0% 0%, 100% 0, 100% 100%, 0% 100%)", ease: "expo.inOut" });
+        } else {
+          burger.classList.remove("active");
+          gsap.to(overlay, 1, { clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)", ease: "expo.inOut", onComplete: () => (overlay.style.display = "none") });
+        }
+      };
+
+      // Inisialisasi clip-path teks hero
+      gsap.set(["#hero-1 h2, #hero-1 h1, #hero-1 h3"], { clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)" });
+      gsap.set([`#hero-2 h2, #hero-3 h2, #hero-4 h2, #hero-5 h2, #hero-2 h1, #hero-3 h1, #hero-4 h1, #hero-5 h1, #hero-2 h3, #hero-3 h3, #hero-4 h3, #hero-5 h3`], { clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)" });
+
+      let tlSlider = gsap.timeline({ repeat: -1, yoyo: true, ease: "expo.out" });
+      
+      while (i < 5) {
+        tlSlider.to(`#hero-${i} h2`, 0.9, { clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)", delay: del })
+          .to(`#hero-${i} h1`, 0.9, { clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)" }, "-=0.3")
+          .to(`#hero-${i} h3`, 0.9, { clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)" }, "-=0.3")
+          .to(`#hero-${i} .hero-image`, 0.7, { clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)" }, "-=1")
+          .to(`#hero-${i + 1} h2`, 0.9, { clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)" })
+          .to(`#hero-${i + 1} h1`, 0.9, { clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)" }, "-=0.3")
+          .to(`#hero-${i + 1} h3`, 0.9, { clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)" }, "-=0.3");
+        i++;
+      }
+    }
+  </script>
+
+</body>
 </html>
