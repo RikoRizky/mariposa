@@ -282,17 +282,21 @@
       flowTl.to(".flow .section-text p", { opacity: 1, duration: 1.2 })
             .to(".flow .section-text", { opacity: 0, duration: 0.8, delay: 0.5 });
 
-      images.forEach((img, index) => {
-        const isLast = index === images.length - 1;
-        flowTl.to(img, {
-          xPercent: isLast ? -50 : (positions[index].x * 160),
-          yPercent: isLast ? -50 : (positions[index].y * 160),
-          z: isLast ? 0 : 3500,
-          opacity: 1,
-          scale: 1,
-          duration: 1.2 /* --- BAGIAN INI DIUBAH (Sedikit dipercepat) --- */
-        }, ">-1.05");
-      });
+      images.forEach((img, index) => { 
+    const isLast = index === images.length - 1; 
+    
+    flowTl.to(img, { 
+        // Perbaikan: Gunakan xPercent dan yPercent agar tidak bentrok dengan nilai x dan y
+        xPercent: isLast ? -50 : (positions[index].x * 150), 
+        yPercent: isLast ? -50 : (positions[index].y * 150),
+        x: 0, // Memastikan x statis di 0
+        y: 0, // Memastikan y statis di 0
+        z: isLast ? 0 : 3500, 
+        opacity: 1, 
+        scale: 1, 
+        duration: 1.2 
+    }, ">-1.05"); 
+});
 
       /* --- BAGIAN SCRIPT TRANSISI YANG DIPERBARUI --- */
 
